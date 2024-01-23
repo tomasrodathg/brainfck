@@ -1,2 +1,2 @@
 brainfck
-**/*.o
+src/*.o
