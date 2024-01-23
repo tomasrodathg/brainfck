@@ -2,8 +2,10 @@
 
 void freesb(struct sbuilder* sb) {
 	// free the string pointer before freeing the string builder
-	free(sb->sp);
-	free(sb);
+	if (sb != NULL) {
+		free(sb->sp);
+		free(sb);
+	}
 }
 
 int freadfull(char *fname, struct sbuilder** sb) {
@@ -34,8 +36,15 @@ int freadfull(char *fname, struct sbuilder** sb) {
 	if (read != fsize) {
 		int err = ferror(fp);
 		printf("Failed to fully read the file - errno: %d\n", err);
+		
+		// closing the file here in case something has gone wrong with the read
+		fclose(fp);
+								
 		return err;
 	}
+
+	// close the file
+	fclose(fp);
 	
 	return 0;
 }
