@@ -8,7 +8,7 @@ int main( void ) {
 	res = freadfull("./brainfck.txt", &sb);
 
 	// Check for any failures
-	if (res > 0) {
+	if (res != 0) {
 		printf("Error reading 'brainfck.txt'\n");
 		freesb(sb);
 		return 1;

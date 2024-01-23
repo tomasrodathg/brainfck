@@ -12,8 +12,8 @@ int freadfull(char *fname, struct sbuilder** sb) {
 	// open the file in 'read'
 	fp = fopen(fname, "r");
 	if (fp == NULL) {
-		printf("Failed to open file\n");
-		return 1;
+		printf("Failed to open file - errno: %d\n", errno);
+		return errno;
 	}
 
 	// go to the end of the file to get the size
@@ -32,8 +32,9 @@ int freadfull(char *fname, struct sbuilder** sb) {
 	// matches the expectation
 	size_t read = fread((*sb)->sp, 1, fsize, fp);
 	if (read != fsize) {
-		printf("Failed to fully read the file.\n");
-		return 1;
+		int err = ferror(fp);
+		printf("Failed to fully read the file - errno: %d\n", err);
+		return err;
 	}
 	
 	return 0;
