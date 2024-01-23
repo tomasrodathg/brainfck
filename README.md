@@ -2,13 +2,14 @@
 
 ## Compilation
 
+Make:
 `make -f Makefile`
 
 Then run the executable.
 
-TODO: add the tests
+**TODO: add the tests**
 
-## Resources
+## Resources
 
 Brainfck:
 - https://en.wikipedia.org/wiki/Brainfuck
