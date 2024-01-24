@@ -40,7 +40,7 @@ int allocl(char *s, struct lexer* l) {
 
 	// this loop is not valid for the stack size, 
 	// needs to cater for the JMP commands []
-	while((c = *s++) != '\0') {
+	while((c = *s++)) {
 		if (strchr(COMMANDS, *s) != NULL)
 			tokssize++;
 		if (c == '>')
@@ -81,9 +81,8 @@ int createtoks(char *s, struct lexer *l) {
 	// while the program is not empty and the characters match one of
 	// brainfck's valid commands, add to the token array in the lexer
 	size_t toki = 0;
-	while(*s++ != '\0')
-		if(!isspace(*s) && strchr(COMMANDS, *s) != NULL)
-			l->toks[toki++] = *s;
+	while(*s++ && !isspace(*s) && strchr(COMMANDS, *s) != NULL)
+		l->toks[toki++] = *s;
 	return 0;
 }
 

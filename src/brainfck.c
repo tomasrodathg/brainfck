@@ -24,9 +24,8 @@ int main( void ) {
 
 	l = createlexer(sb);
 	printf("\n\nLexer:\n");
-	while((c = next(l)) != '\0') {
-		printf("token: %c\n", c);
-	}
+	while((c = next(l))) printf("token: %c\n", c);
+
 
 	printf("\n\nStack:\n");
 	for(size_t i = 0; i < l->stksize; i++) {
