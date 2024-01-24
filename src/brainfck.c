@@ -2,7 +2,8 @@
 
 int main( void ) {
 	struct sbuilder* sb = {0};
-	int res;
+	struct lexer* l = {0};
+	int res,c;
 
 	// Read the file in full.
 	// The usage of a double pointer for sbuilder is done on purpose
@@ -21,8 +22,21 @@ int main( void ) {
 	printf("File contents:\n\n");
 	printf("%s\n", sb->sp);
 
+	l = createlexer(sb);
+	printf("\n\nLexer:\n");
+	while((c = next(l)) != '\0') {
+		printf("token: %c\n", c);
+	}
+
+	printf("\n\nStack:\n");
+	for(size_t i = 0; i < l->stksize; i++) {
+		printf("cell: #c%lu\n", i);
+		printf("value: %d\n", l->stk[i]);
+	}
+
 	// Free the memory of the string builder
 	freesb(sb);
+	freel(l);
 
 	return 0;
 }
